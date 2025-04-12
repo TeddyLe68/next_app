@@ -1,4 +1,3 @@
-import { currentUser } from "@clerk/nextjs/server";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import { LinkIcon, MapPinIcon } from "lucide-react";
+import { currentUser } from "@clerk/nextjs/server";
 
 async function Sidebar() {
   const authUser = await currentUser();
@@ -15,7 +15,6 @@ async function Sidebar() {
   const user = await getUserByClerkId(authUser.id); // POST request to get user data
   if (!user) return null;
 
-  console.log(authUser);
   return (
     <div className="sticky top-20">
       <Card>
