@@ -49,3 +49,18 @@ export async function getUserByClerkId(clerkId: string) {
     },
   });
 }
+
+// This function is used to get the user ID from the Clerk ID
+// It is used in the getUserById function to get the user ID from the database
+// and return it to the client
+export async function getUserById() {
+  // Get the current user from Clerk
+  const { userId: clerkId } = await auth();
+  if (!clerkId) throw new Error("User not authenticated");
+
+  // Get the user from the database using the Clerk ID
+  const user = await getUserByClerkId(clerkId);
+  if (!user) throw new Error("User not found");
+
+  return user.id;
+}
